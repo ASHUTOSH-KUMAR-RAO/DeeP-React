@@ -1,0 +1,20 @@
+.user-cards{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(19, 22, 21);
+  flex-direction: column;
+  background-color: rgb(166, 68, 68);
+  margin-top: 10px;
+  padding: 5px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+
+
+#Image{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
