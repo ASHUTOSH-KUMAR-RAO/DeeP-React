@@ -12,6 +12,8 @@
 
 ## State ManageMent :-
 
+
+
 - ### Hooks =>
 
 **Note-1** :- Hook ,is nothing but jo react humko Functionalty/Feature provide karwata hai hum usko Hook ke through hi use krte hai , and then hum react mein jitne functionalty hote unko easly use kr sekte hai
@@ -19,6 +21,8 @@
 **Note-2** :- sabse important baat ki hum pehchane kaise hi ke ye ek hook hai , to iska simple sa idea hai ki jitna bhi reak meini hook hote hai un sabka prefix mein use likha hota hai underrated but bahut important hai hai ye ideas
 
 - ### useState Hook =>
+
+  - [useState Here](https://react.dev/reference/react/useState)
 
   - Aur useState hame 2 things provide karwata hai in react :-
 
@@ -40,6 +44,8 @@
   - Aur iska sabse achi baat ye hai ki hum useState ke function mein kuch bhi change krte aab jaha -jaha wo naam dikhega waha per useState update/randering kr dega krdega on browser.(Beauty of useState ❤️❤️❤️)
 
 ## Props :-
+
+- [Props-Here](https://react.dev/learn/passing-props-to-a-component)
 
 - Jaab bhi hamein data transper krna hota hai components ke bich mein taab hum props use krte hai .
 
@@ -87,13 +93,16 @@ const [count, setCount] = useState(0);
 ## Conditional Randering :-
 
 ### Four Way se hum Conditional Randering kara sekte hai :-
-
+ 
+   - [Conditional-Randering](https://react.dev/learn/conditional-rendering)
 - if-else
 - ternary Operator
 - Logical Operator
 - Early return kar gye hum.
 
 ## Event Handling :-
+
+
 
 - Event Handler ko hum kisi bhi element per click kr ke use kr skte hai.
 
@@ -114,6 +123,8 @@ const handleClick = () => {
 ```
 
 ## useEffect-Hook :-
+
+ - [useEffect-Here](https://react.dev/reference/react/useEffect)
 
 - About Hook :-
 
@@ -191,3 +202,202 @@ useEffect(() => {
   }, [total]);
 
 ```
+
+## useContext-hook
+
+- [useContext-here](https://react.dev/reference/react/useContext)
+
+**Prop-Driling** :- Basically iska mtlb hota yedi ek Component Data send kaar raha hai aur wo data shirf kisi ek ko hi bhejna hai to uss case mein hum "prop-Driling" ka use krte hai.
+
+
+### How to Work useContext API or Hook :-
+
+- Basically iska use hum isiliye krte hai jaise ki hum shirf individual component se data  lekar aur kisi individual component ke pass bhejt hai thik , but in dono ke bich mein jitna bhi extra component ata hai usko manage krne ke liye hum useContext Hook ka use krte hai.
+  
+  - Basicallly iske andar hum shirf three steps ke andar hi poora process karte hai 
+    
+      - pehle context ko  create krte hai.
+
+      - Phir context ko Provide karo , 😀😀ye bolega ki mai data provider hu mai provide kaar raha hu 
+
+      - aur last mein context ko consume bhi karo, 😢 aur ye bola ki mujhe data ki need ki hai to mai data consume karunga
+
+
+```jsx
+import React, { createContext, useState } from "react";
+import Child1 from "./Components/Child1";
+
+//! Step 1:  hum aise Context ko create krte hai 🍎
+const userContext = createContext(); 
+
+// ? Step 2: wrap all the child in side the provider, aab yeha provider ka mtlb ki hum ye chah rehe ki koi bhi consumer baan sakta hai means ki koi bhi data fetch kaar sakta hai , to isiliye sabko provider bananpadega n tabhi to provide kara payega n .
+
+// todo => Step 3 : ek variable bnayenge (useState) aur usko provider mein as a value pass kr denge 
+
+// * Step 4:- aab kya consumer ke andar jayenge aur sabko consume kaar lenge
+
+const App = () => {
+
+  const [User,setUser] = useState({name: "Ashutosh Kumar rao"});
+  return (
+    <>
+    <h1>hi baby kaise ho aap </h1>
+
+    <userContext.Provider value={User}>
+      <Child1 />
+    </userContext.Provider>
+    </>
+  );
+};cls
+
+
+export default App;
+export {userContext} //? isko export bahut jruri hota hai 
+```
+
+
+## Routing :- 
+
+- [Router Is Here](https://reactrouter.com/en/main/routers/create-browser-router)
+
+    - Why We Use :-
+         
+         - yedi dekha jaye hum routing ke bina ONLY SPA hi bana sekte hai ,aur routing ki jarurat hame isiliye padi ki kabhi hota hai n website me ki humne tap aur hmko uss link uss specific page per lekar chala gya to isi kaam ko karne ke liye hum routing use krte hai.
+
+         - Aur latest app ya kisi bhi complex app mein Browser Routing hi use hoti hai , aur iska use karne ke liye hmko router dom access hona jaruri hai aur isiliye hmko isko intsall karna padega is command se "npm i react-router-dom"=> yehi command hai jisese hum access kr sekte hai . 
+
+```jsx
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Awash from "./Components/Awash";
+import Abhishek from "./Components/Abhishek";
+import Anjali from "./Components/Anjali";
+import Jyoti from "./Components/Jyoti";
+
+const router = createBrowserRouter(
+  //! aur is paranthasis ke andar hamesa array hi hoga (arrays of routes jitna bhi routes create karenge )
+  [
+    { path: "/", element: <Awash /> }, //? Aur Basically hum aise hi routing create krte hai
+    { path: "/Abhishek", element: <Abhishek /> },
+    { path: "/Anjali", element: <Anjali /> },
+    { path: "/Jyoti", element: <Jyoti /> },
+
+    // todo=> aur Basically haar ek route kuch aise dikhta hai, aur haar ek rout ke andar ek path rehta hai jo btayega ki ek base URL hai like(www.something) aise karke hota hai ek path,aur phir iske baad isme ek element bhi hota aur ye isiliye hota ki humko kya bhejna hai iske andar means kaun sa element
+  ]
+);
+const App = () => {
+  return (
+    <>
+      <RouterProvider router={router} />
+
+      {/*  basically humne yeha per ye isiliye jisese hum bta sekte hai maine kiss path mein kya send kiya hai means , application context deta hai ki jitna bhi add hai wo saab page reload karwana hai, aur dhyan rehe ki jaab bhi run karaw usese pehle RouterProvider ko declare karna nhi bhulna hai in any houw */}
+    </>
+  );
+};
+
+export default App;
+```
+ 
+ ### Aab hum yeha yeha ye kaar rehe hai kyuki react hum krte hai specially SPA banane ke liye jaab hum kisi link tap kre to wo poore page re-randering n kare isiliiye hum yeha ancor tag ki place per link tag use kiya jiska attribute hai to="",hota hai 
+
+
+ ```jsx
+ import React from "react";
+import { Link } from "react-router-dom";
+
+const Navbar = () => {
+  return (
+    <div>
+      <ul>
+        <li>
+          <Link to="/">Awash</Link>
+        </li>
+        <li>
+          <Link to="/Abhishek">Abhishek</Link>
+        </li>
+        <li>
+          <Link to="/Anjali">Anjali</Link>
+        </li>
+        <li>
+          <Link to="/Jyoti">Jyoti</Link>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
+export default Navbar;
+```
+
+#### Isko hum aise access krte hai :-
+
+```jsx
+
+ path: "/",
+    element: 
+      <div>
+        <Awash />
+        <Navbar />
+      </div>
+```
+
+## useParams :-
+
+ -  yedi hme dekhe to jaab kabhi bhi hum website per search krte hai to www.something.com//id..... aise krke kuch hota hai. aur isko hum react ke word mein bole to parameter bolte aur isi Paramtere ko pass krne ke liye humko useParams ki jarurat padti hai .
+
+
+ ## useNavigation Hook :-
+
+  - Basically ye wo kaam karta jaise mere ko ek page se dusre page per jana hai to humko full fom randering karaye bina taab use hota hai useNavigation hook.
+
+
+  ```jsx
+
+  import React from 'react'
+import { useNavigate } from 'react-router-dom';
+
+const Awash = () => {
+
+  const Navigation = useNavigate();
+
+  const handleClick2 =()=>{
+    Navigation("/Abhishek");
+  }
+  return (
+    <div>
+      <h1>Kaise ho Awash beta ❤️</h1>
+      <button onClick={handleClick2}>
+        move to Abhishek Page
+      </button>
+    </div>
+  )
+}
+
+export default Awash
+```
+
+## Nested Routing :-
+
+  - aur dekha jaye to jaise hum normal routing krte hai same aise hi nested routing bhi hota hai isme difference ye hota hai ,ki is case mein layer waise kaam krte hai ,jaise ki hmko dasboard ke andar ke andar kisi course ke andar jana phir waha se uske andar hi kisi personal course chose krna aur phir usme se kisi ek hi question ko solve krna hai."www.30days.com/dasboard/Fullstack/js.
+
+  ```jsx 
+
+  {
+    path: "/Anjali",
+    element: (
+      <div>
+        <Anjali />
+        <Navbar />
+      </div>
+    ),
+    children: [
+      { path: "Course", element: <Course /> },
+      { path: "AIML", element: <AIML /> },
+    ],
+  },
+
+  ```
+
+   - aab jaise yeha per maine anjali ke liye nested routing kiya hai .Container
+
+**NOTE :** aur dhayn rehe jaab humko parent element ke andar child element ko route karana hota hai to uss case mein <Outlet/> iss tag ka use krte hai 

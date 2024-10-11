@@ -1,0 +1,11 @@
+.Container{
+  width: 300px;
+  height: 300px;
+  border: 1px solid salmon;
+  border-width: 5px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
