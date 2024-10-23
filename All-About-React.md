@@ -209,10 +209,19 @@ useEffect(() => {
 
 **Prop-Driling** :- Basically iska mtlb hota yedi ek Component Data send kaar raha hai aur wo data shirf kisi ek ko hi bhejna hai to uss case mein hum "prop-Driling" ka use krte hai.
 
+## Purpose of PropDrilling:-
+
+- React mein prop drilling ek aisa pattern hai jisme hum data ko parent component se kisi deeply nested child component tak pahunchane ke liye multiple components ke beech se pass karte hain, chahe un components ko wo data directly zarurat na ho. Iska matlab, ek component jo sirf data ko receive karke aage pass kar raha hai, bina khud use kiye.
+
+ - Prop drilling tab hoti hai jab aapko ek deeply nested component ko kisi top-level parent se data ya functions dene hote hain, lekin aapko wo props har intermediate component tak manually pass karne padte hain.
+
+- Example:
+Agar hamare paas ek GrandParent component hai jo ek Parent component ke through Child component ko props dena chahta hai:
+
 
 ### How to Work useContext API or Hook :-
 
-- Basically iska use hum isiliye krte hai jaise ki hum shirf individual component se data  lekar aur kisi individual component ke pass bhejt hai thik , but in dono ke bich mein jitna bhi extra component ata hai usko manage krne ke liye hum useContext Hook ka use krte hai.
+- Basically iska use hum isiliye krte hai jaise ki hum shirf individual component se data  lekar aur kisi individual component ke pass bhejte hai thik , but in dono ke bich mein jitna bhi extra component ata hai usko manage krne ke liye hum useContext Hook ka use krte hai.
   
   - Basicallly iske andar hum shirf three steps ke andar hi poora process karte hai 
     
@@ -401,3 +410,203 @@ export default Awash
    - aab jaise yeha per maine anjali ke liye nested routing kiya hai .Container
 
 **NOTE :** aur dhayn rehe jaab humko parent element ke andar child element ko route karana hota hai to uss case mein <Outlet/> iss tag ka use krte hai 
+
+
+## Form Handling (React Form Hook)
+
+- [React Form Hook Here](https://react-hook-form.com/get-started)
+
+     - **NOTE:** Aise hum form submit karte hai aur create bhi krte hai aur sath mein useForm Hook ka use bhi kaar rehe hai 
+
+```jsx
+     import React from "react";
+import "./App.css";
+import { useForm } from "react-hook-form";
+
+const App = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => { // yeha aisa isiliye kiya kyuki jo data maine pass kiya usko just clg mein print bhi karwana padta hai isiliye 
+    console.log("Submit the form", data);
+  };
+  return (
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <label>First Name:- </label>
+          <input
+            type="text"
+            placeholder="Enter your first name..."
+            {...register("First-Name")}
+          />
+        </div>
+        <br />
+        <div>
+          <label>Middle Name:-</label>
+          <input
+            type="text"
+            placeholder="Enter your last name..."
+            {...register("Middle-Name")} // todo => hamne yeha per isiliye kiya hai kyuki hum form link kiye apne register se isiliye hamne yeha per spread operator use kiya hai
+          />
+        </div>
+        <br />
+        <div>
+          <label>Last Name:-</label>
+          <input
+            type="text"
+            placeholder="Enter your last name..."
+            {...register("Last-Name")}
+          />
+        </div>
+        <br />
+        <button>Submit </button>
+      </form>
+    </>
+  );
+};
+
+export default App;
+```
+
+   - Aur itne type ke validation kaar sekte hai hum react ke andar
+
+**RULES :-** List of validation rules supported:
+
+- required
+- min
+- max
+- minLength
+- maxLength
+- pattern
+- validate
+
+
+```jsx
+<div>
+          <label>First Name:- </label>
+          <input
+            type="text"
+            placeholder="Enter your first name..."
+            {...register("firstName", {
+              required: true,
+              minLength: {
+                value: 3,
+                message: " arre bhai kaam se kaam 3 length ki value ko to rakho n bhai.",
+              },
+              maxLength: {value:8,message:"mere bhai max length 8 hi type karna hai n"},
+            })} //! hamne yeha "required" ka use isiliye kiya iska mtlb ye humko first name to chaiye hi any how,aur yedi mai iska bina hi submit karunga to nhi wo bolega ki isko to karna hi padega, hmm lekin ye ho sakta hai hum shirf yehi use kr sekte hai .,jaise hamne "minLength" to iska mtlb ye hua ki humko kaam se kaam 4 length chaiye nhi to mai form ko submit nhi karunga.,just iske similarly mein maxLength bhi use kr sekte isese hota hai iski maxmum length itni honi chiaye.
+          />
+          {errors.firstName && <h1>{errors.firstName.message}</h1>} {/* Basically hamne yeha per isiliye likha hai maan lijiye hamne jo condition rakha hai uske according nhi dala hamne kuch jo error aata hai humko usese message ke form ke dekhna to hoga ki kyu error aa raha hai just isiliye hamne ek message likha jo khud se banaya hai aur usko hamne error ke andar ke daal diya hai jisesese wo show ho raha hai errors aane ka reason kya hai,genrally isko hum bolte hai validation show karwana , aur aise hi hum kisi chiz ke andar error show karwa sekte hai  */}
+        </div>
+
+        <br />
+
+        <div>
+          <label>Middle Name:-</label>
+          <input
+            type="text"
+            placeholder="Enter your last name..."
+            {...register("middleName")}
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label>Last Name:-</label>
+          <input
+            type="text"
+            placeholder="Enter your last name..."
+            {...register("lastName")}
+          />
+        </div>
+```
+
+## Redux :-
+
+- [Redux is Here](https://redux-toolkit.js.org/)
+
+- Aur redux toolkit use karne ke liye hmko iska package install krna padta hai 
+
+- jaise ki humko pta hai reduxe ke pehle flux aya tha (aur basically isko bhi facebook ne hi degin kiya tha)
+
+- aur jaise ki pta hai redux ek independent library hai
+
+- aur dekha jaye to redux mein do hi function hote hai ek useSelector (aur iska mtlb jaab hum koi value ko select lrte hai) aur ek useDispatch(iska jaab koi value ko hum bhejte hai )
+### Why Need Redux :-
+
+- generally hum isme state ko maintaine krte hai 
+
+- aur generally prop-drillling men jo problem ho rhi thi usi problem hum yeha per end kaar rehe hai by the help of ,centralised store(jo state ko maintaine krta hai )
+
+- **TERMS :-** Action,Reducer,Slice,Store,State.......
+
+- ### How Its Work :- 
+
+- **Action:-** it is nothing but only an event , means maan lijiye hamne ek event per kaam kiya thik aur jo bhi iss event ko wrap krta hai usko hi hum Action bolte hai (aur isko hum combination bhi bol sekte hai Event + otherThing ka),otherThing mein kuch bhi ho sakta hai jaise data,object ya phir any thing ho sakta hai { Action is only just a object jo consider krta event ke info ko aur sath mein hi aur extra info ko bhi add kr sakta hai }
+
+- **Reducer:-** ye hota kuch nhi hai bass ek simple sa function hota hai that's it.,jaha per einter logic likhte hai n hum data ko change karne ke liye ya phir update krne ke liye aur ye saab hum jiss function ke andar likhte hai usko  hi to hum reducer bolte hai 
+
+- **Slice:-** isme kya hota hai , jaise maan lijiye ki hamne apne website mein multiple features add kaar diye hai thik, jaise ki (increment or dcrement , authentication,Ai integration) thik .to jo inke state ko maintaine krne ke kaam krta hai usko hi hum slice bolte hai ( means slice ke andar hum iske state ke maintaine kerne ke logic ko likhte hai )
+
+- **Store:-** ye ek single source of truth hota hai jisme state hoti hai (means jaha per saab data rehta hai )
+
+- **State:-** ye to techinal name isko hum normal ek simple word mein bole to ye data ho bass 
+
+[Step by Step mill jayega](https://redux-toolkit.js.org/tutorials/quick-start)
+
+```jsx
+
+Step 1:- hamne ek store ko create kiya hai state ko manage karne ke liye
+
+Step 2: hamne App ko wrap kiya hai Store ke andar
+
+Step 3 :- iske baad hum Slice create karenge jo features provide krwata hai
+
+/*
+ Steps :-
+
+ - ek Store create krna hota hai 
+
+ - phir App component ko wrap karna hota hai provider ke andar
+
+-  phir ek slice create krte hai
+
+-  aur phir register kr dete hai reducer ko store ke andar
+
+*/
+
+``` 
+## useCallback Hook :- 
+
+- basically it means lets cache(memory) a function definitation between re-rander. 
+
+- aur basically hum isko memoization bhi bol sekte hai V
+
+     - [Anything about useCallback](https://react.dev/reference/react/useCallback)
+
+## useRef Hook :-
+
+- useRef is a React Hook that lets you reference a value that’s not needed for rendering.
+
+- const ref = useRef(initialValue)
+
+- iska use taab krte hai hum jaab kisi bhi chij ka refrence chaiye hota hai hame taab ye hook ata hai 
+
+-  [useRef Hook Here](https://react.dev/reference/react/useRef)
+
+
+
+## Learning New Thing During The Write and Paste Project :-
+
+**Note :-** 
+-  Local Storage :- isko hum taab use krte jaab hum ko data kisi local storage mein store karna hota hai taab , aur ye kaam hum taab krte hai jaab mere pass koi external data base nhi hota hai jaise ki mongodb , Sql etc.
+
+- Aur Basically Local Store mein data hamesa key aur value ke form mei store hota hai 
+
+
