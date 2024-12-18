@@ -609,4 +609,12 @@ Step 3 :- iske baad hum Slice create karenge jo features provide krwata hai
 
 - Aur Basically Local Store mein data hamesa key aur value ke form mei store hota hai 
 
+## React Three Fibre :-
+
+- [R3F Is Here](https://r3f.docs.pmnd.rs/getting-started/introduction)
+
+
+## How Api Can Be Handle In React:-
+
+- Black-Box api ka mtlb hota hai aisa api ki jispe hamra control nhi hota hai ,baas data recive ho jata hai 
 
