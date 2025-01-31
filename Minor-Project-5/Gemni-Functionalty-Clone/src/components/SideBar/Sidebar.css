@@ -1,0 +1,74 @@
+.sidebar{
+min-height: 100vh;
+display: inline-flex;
+flex-direction: column;
+justify-content: space-between;
+background-color: rgb(249, 247, 247);
+padding: 25px 15px;
+}
+
+.sidebar img{
+  width: 26px;
+}
+
+.sidebar .Menu{
+  display: block;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.sidebar .New-Chat{
+  display: inline-flex;
+  align-items: center;
+  margin-top: 50px;
+  gap: 12px;
+  padding: 10px 15px;
+  background-color: lightblue;
+  border-radius: 50px;
+  color: grey;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.sidebar .New-Chat:hover{
+  scale: .9;
+  font-weight: 900;
+}
+
+.Recent-Chat{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar .Recent-title{
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.sidebar .Recent-Entry{
+  display: flex;
+  gap: 10px;
+  color: #282828;
+  padding: 10px;
+  padding-right: 5px;
+  border-radius: 50px;
+  align-items: start;
+  cursor: pointer;
+}
+
+.sidebar .Recent-Entry:hover{
+  background-color: rgb(204, 208, 210);
+  font-weight: 600;
+  box-shadow: #282828;
+}
+
+.sidebar .Bottom{
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .bottom-item{
+  padding-right: 10px;
+  cursor: pointer;
+}
